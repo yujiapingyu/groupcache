@@ -20,7 +20,9 @@ import (
 	"bytes"
 	"errors"
 	"io"
+	"os"
 	"strings"
+	"io/ioutil"
 )
 
 // A ByteView holds an immutable view of bytes.
@@ -89,6 +91,11 @@ func (v ByteView) Copy(dest []byte) int {
 		return copy(dest, v.b)
 	}
 	return copy(dest, v.s)
+}
+
+func (v ByteView) ReadBytesFromFile(f *os.File) error {
+	v.b, err = ioutil.ReadAll(f)
+	return err
 }
 
 // Equal returns whether the bytes in b are the same as the bytes in
