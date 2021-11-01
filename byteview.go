@@ -94,6 +94,7 @@ func (v ByteView) Copy(dest []byte) int {
 }
 
 func (v ByteView) ReadBytesFromFile(f *os.File) error {
+	var err error
 	v.b, err = ioutil.ReadAll(f)
 	return err
 }
